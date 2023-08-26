@@ -15,7 +15,23 @@
     "commands": [
       {
         "command": "shellcheckselection.bash",
-        "title": "ShellCheckSelection: bash"
+        "title": "ShellCheckSelection: Bash"
+      },
+      {
+        "command": "shellcheckselection.dash",
+        "title": "ShellCheckSelection: Dash"
+      },
+      {
+        "command": "shellcheckselection.bourne",
+        "title": "ShellCheckSelection: Bourne (sh)"
+      },
+      {
+        "command": "shellcheckselection.korn",
+        "title": "ShellCheckSelection: Korn (ksh)"
+      },
+      {
+        "command": "shellcheckselection.clear",
+        "title": "ShellCheckSelection: Clear Diagnostics"
       }
     ]
   },
