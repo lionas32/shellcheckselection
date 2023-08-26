@@ -31,38 +31,44 @@ export function activate(context: vscode.ExtensionContext) {
 
 	function lintShell(shell: string) {
 		const options: string[] = ["-f", "json", "-s", shell, "-"]
-		// The code you place here will be executed every time your command is executed
 		const editor = vscode.window.activeTextEditor;
 		if (editor) {
 			diagnosticCollection.clear()
 			const selection = editor.selection;
 			const selectedText = editor.document.getText(selection);
-			if (selectedText.trim() == "") {
+
+			if (selectedText.trim() === "") {
 				console.log("[INFO] No text selected. Returning early.")
 				return
 			}
+
+			// If the selections first column is not the first column of the line,
+			// we pad the beginning of the selected string.
+			// Allows us to avoid dealing with offsets later on.
+			if (selection.start.character !== 1) {
+				selectedText.padStart(selectedText.length + selection.start.character - 1, " ")
+			}
+
 			const childProcess = spawnSync("shellcheck", options, { input: selectedText, encoding: "utf-8" })
 			const results: ShellCheckResult[] = JSON.parse(childProcess.stdout)
 
-
-
-			
-			const diagnostics = results.map((result) =>
-				new vscode.Diagnostic(
-					new vscode.Range(
-						new vscode.Position(
-							result.line + selection.start.line - 1,
-							selection.start.character + result.column - 1,
-						),
-						new vscode.Position(
-							result.endLine + selection.start.line - 1,
-							selection.start.character + result.endColumn - 1,
-						)
-					),
+			const diagnostics = results.map((result) => {
+				const startPosition =
+					new vscode.Position(
+						selection.start.line + result.line - 1,
+						result.column - 1,
+					)
+				const endPosition =
+					new vscode.Position(
+						selection.start.line + result.endLine - 1,
+						result.endColumn - 1,
+					)
+				return new vscode.Diagnostic(
+					new vscode.Range(startPosition, endPosition),
 					`${result.message} (SC${result.code})`,
-					vscode.DiagnosticSeverity.Information
+					vscode.DiagnosticSeverity.Information,
 				)
-			)
+			})
 			diagnosticCollection.set(editor.document.uri, diagnostics)
 		} else {
 			vscode.window.showInformationMessage('ShellCodeCheck: No active text editor.');
