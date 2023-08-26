@@ -18,9 +18,10 @@ interface ShellCheckResult {
 
 namespace CommandIds {
 	export const lintBash = "shellcheckselection.bash"
-	export const lintKorn = "shellcheckselection.korn"
 	export const lintDash = "shellcheckrelection.dash"
 	export const lintBourne = "shellcheckrelection.bourne"
+	export const lintKorn = "shellcheckselection.korn"
+	export const clearDiagnostics = "shellcheckselection.clear"
 }
 
 export function activate(context: vscode.ExtensionContext) {
@@ -73,9 +74,10 @@ export function activate(context: vscode.ExtensionContext) {
 		vscode.commands.registerCommand(CommandIds.lintBash, () => lintShell("bash")),
 		vscode.commands.registerCommand(CommandIds.lintBourne, () => lintShell("sh")),
 		vscode.commands.registerCommand(CommandIds.lintKorn, () => lintShell("ksh")),
-		vscode.commands.registerCommand(CommandIds.lintKorn, () => lintShell("bourne")),
+		vscode.commands.registerCommand(CommandIds.lintDash, () => lintShell("dash")),
+		vscode.commands.registerCommand(CommandIds.clearDiagnostics, () => diagnosticCollection.clear()),
 		// other stuff
-		diagnosticCollection
+		diagnosticCollection,
 	)
 }
 
