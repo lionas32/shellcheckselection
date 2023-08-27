@@ -25,8 +25,6 @@ namespace CommandIds {
 }
 
 export function activate(context: vscode.ExtensionContext) {
-
-
 	const diagnosticCollection = vscode.languages.createDiagnosticCollection('ShellCheckSelection')
 
 	function lintShell(shell: string) {
@@ -35,7 +33,7 @@ export function activate(context: vscode.ExtensionContext) {
 		if (editor) {
 			diagnosticCollection.clear()
 			const selection = editor.selection;
-			const selectedText = editor.document.getText(selection);
+			let selectedText = editor.document.getText(selection);
 
 			if (selectedText.trim() === "") {
 				console.log("[INFO] No text selected. Returning early.")
@@ -45,8 +43,9 @@ export function activate(context: vscode.ExtensionContext) {
 			// If the selections first column is not the first column of the line,
 			// we pad the beginning of the selected string.
 			// Allows us to avoid dealing with offsets later on.
-			if (selection.start.character !== 1) {
-				selectedText.padStart(selectedText.length + selection.start.character - 1, " ")
+			if (selection.start.character !== 0) {
+				console.log("[INFO] Padding selected text.")
+				selectedText = " ".repeat(selection.start.character).concat(selectedText)
 			}
 
 			const childProcess = spawnSync("shellcheck", options, { input: selectedText, encoding: "utf-8" })
