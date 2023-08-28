@@ -3,6 +3,10 @@
   "displayName": "ShellCheckSelection",
   "description": "ShellCheck a selection",
   "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lionas32/shellcheckselection"
+  },
   "engines": {
     "vscode": "^1.81.0"
   },
