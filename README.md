@@ -4,7 +4,7 @@ Run ShellCheck on a block of code.
 
 ## Usage
 
-![Usage GIF](https://github.com/lionas32/shellcheckselection/blob/main/images/usage.gif)
+![Usage GIF](https://raw.githubusercontent.com/lionas32/shellcheckselection/main/images/usage.gif)
 
 ## Why?
 
