@@ -17,6 +17,10 @@ You will need to have [ShellCheck](https://github.com/koalaman/shellcheck) insta
 
 ## Release Notes
 
+### 0.0.2
+
+Update `.gif` link in `README.md`. Probably don't need to bump version for this (?)
+
 ### 0.0.1
 
 Initial release of `ShellCheckSelection`.
