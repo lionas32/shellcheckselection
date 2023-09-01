@@ -62,11 +62,16 @@ export function activate(context: vscode.ExtensionContext) {
 						selection.start.line + result.endLine - 1,
 						result.endColumn - 1,
 					)
-				return new vscode.Diagnostic(
+				const diagnostic = new vscode.Diagnostic(
 					new vscode.Range(startPosition, endPosition),
-					`${result.message} (SC${result.code})`,
+					result.message,
 					vscode.DiagnosticSeverity.Information,
 				)
+				diagnostic.code = {
+					value: `SC${result.code}`,
+					target: vscode.Uri.parse(`https://www.shellcheck.net/wiki/SC${result.code}`)
+				}
+				return diagnostic
 			})
 			diagnosticCollection.set(editor.document.uri, diagnostics)
 		} else {
