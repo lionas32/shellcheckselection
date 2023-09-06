@@ -17,6 +17,10 @@ You will need to have [ShellCheck](https://github.com/koalaman/shellcheck) insta
 
 ## Release Notes
 
+### 0.1.1
+
+Add an icon
+
 ### 0.1.0
 
 Added diagnosis code to the output with a link to the [wiki](https://www.shellcheck.net/wiki/).
