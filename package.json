@@ -3,7 +3,7 @@
   "displayName": "ShellCheckSelection",
   "description": "ShellCheck a selection",
   "publisher": "lionas",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "icon": "images/icon.png",
   "repository": {
     "type": "git",
